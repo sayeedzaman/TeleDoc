@@ -1,0 +1,313 @@
+<cart>
+<style>
+
+.Cart-Container{
+ width: 100%;
+ height:50%;
+ background-color: #ffffff;
+ border-radius: 20px;
+ box-shadow: 0px 25px 40px #1687d933;
+ position: fixed;
+ bottom: 88px;
+ right: 20px;
+ max-width: 30%;
+ display:none;
+ overflow: scroll;
+}
+
+.Header{
+ margin: auto;
+ width: 90%;
+ height: 15%;
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+}
+.Heading{
+ font-size: 20px;
+ font-family: �Open Sans�;
+ font-weight: 700;
+ color: #2F3841;
+}
+.Action{
+ font-size: 14px;
+ font-family: �Open Sans�;
+ font-weight: 600;
+ color: #E44C4C;
+ cursor: pointer;
+ border-bottom: 1px solid #E44C4C;
+}
+
+.Cart-Items{
+ margin: auto;
+ width: 90%;
+ height: 30%;
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+}
+.image-box{
+ width: 15%;
+ text-align: left;
+}
+.about{
+ height: 100%;
+ width: 70%;
+}
+.title{
+ width:70%; 
+ word-wrap:break-word; 
+ display:inline-block;
+ text-align: center;
+ padding-left: 85px;
+ padding-right: 8px;
+ padding-top: 50px;
+ line-height: 20px;
+ font-size: 16px;
+ font-family: �Open Sans�;
+ font-weight: 600;
+ color: #202020;
+}
+
+.amount-remove{
+    width:100%;
+    padding-left: 30px;
+}
+
+.amount{
+ font-size: 20px;
+ text-align: center;
+ 
+ font-family: �Open Sans�;
+ font-weight: 800;
+ color: #141313;
+}
+.save{
+ padding-top: 5px;
+ font-size: 14px;
+ font-family: �Open Sans�;
+ font-weight: 600;
+ color: #1687d9;
+ cursor: pointer;
+}
+.remove{
+ text-align: right;
+ padding-bottom: 10px;
+ font-size: 14px;
+ font-family: �Open Sans�;
+ font-weight: 600;
+ color: #E44C4C;
+ cursor: pointer;
+}
+
+.counter{
+ width: 15%;
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ 
+}
+.btn{
+ width: 25px;
+ height: 25px;
+ border-radius: 100%;
+ background-color: #d9d9d9;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ font-size: 20px;
+ font-family: �Open Sans�;
+ font-weight: 900;
+ color: #202020;
+ cursor: pointer;
+}
+
+.count{
+ font-size: 20px;
+ font-family: �Open Sans�;
+ font-weight: 900;
+ color: #202020;
+} 
+
+.checkout{
+text-align: center;
+ float: right;
+ margin-right: 3.7%;
+ margin-bottom: 5%;
+ width: 28%;
+}
+
+.items{
+ font-size: 16px;
+ font-family: �Open Sans�;
+ font-weight: 500;
+ color: #909090;
+ line-height: 10px;
+}
+.total-amount{
+ font-size: 20px;
+ font-family: �Open Sans�;
+ font-weight: 900;
+ color: #202020;
+}
+.button{
+ margin-top: 5px;
+ width: 100%;
+ height: 40px;
+ border: none;
+ background: linear-gradient(to bottom right, #B8D7FF, #8EB7EB);
+ border-radius: 20px;
+ cursor: pointer;
+ font-size: 16px;
+ font-family: �Open Sans�;
+ font-weight: 600;
+ color: #202020;
+}
+
+.open-button {
+  background-color: #555;
+  color: white;
+  padding: 5px;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+  position: fixed;
+  bottom: 23px;
+  right: 30px;
+  width: 60px;
+}
+
+.open-button:hover {
+    padding: 6px;
+    width: 62px;
+}
+
+.open-button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+.quantity{
+ width: 25%;
+ min-width: 20px;
+}
+
+[readonly] {
+  border: 1px solid #ccc;
+  background-color: #eee;
+}
+</style>
+
+
+
+<button class="open-button" onclick="openCART()"><img src="https://cdn.imgbin.com/19/22/3/imgbin-shopping-cart-icon-shopping-cart-aZxB9v23hRKuztjNENa8jA8HM.jpg" width=50px></button>
+    
+    
+ <div class="Cart-Container" id="user-cart">
+     <div class="cart-list" id="cart-list">
+    <div class="Header">
+ <h3 class="Heading">Shopping Cart</h3>
+ <h5 class="Action">Remove all</h5>
+ </div>
+<% for (let product of cart){ %>
+        
+<% if(product.QUANTITY>0) { %>
+
+<div class="Cart-Items" id="sheraa">
+ <div class="image-box" id="image-box">
+ <img src="<%= product.IMAGE %>" id="chobi" width=150px height=150px>
+ </div>
+ <div class="about">
+ <div class="title" > 
+   <%= product.PRODUCT_NAME %>
+ </div>
+<div class="amount-remove">
+<div class="amount">$<%= product.PRICE %></div>
+ <div class="remove"><u>Remove</u></div></div></div>
+
+<div class="counter" id="counter">
+    <button class="btn" onclick="Increament(<%=product.PRODUCTID%>)">+</button>
+    <input type="text" class="quantity" name="quantity" id="id <%=product.PRODUCTID%>"  value=<%=product.QUANTITY%> readonly>
+    <button class="btn" onclick="Decreament(<%=product.PRODUCTID%>)">-</button>
+ </div>
+
+
+</div><% } %>
+<% } %>
+     </div>
+
+<div class="checkout">
+ <div class="total"></div>
+ <div class="items">2 items</div>
+ <div class="total-amount">$6.18</div>
+ <button class="button">Checkout</button><br></div>
+
+
+
+
+<script >
+     
+     function Increament(productID){
+         let data = {
+             pid: productID,
+             
+         }
+         axios.post(' http://localhost:3000/cart/cartIncreament',data).then((da)=>{
+             console.log("-------------done-------------");
+
+            console.log(productID);
+            // let x=quantity+1;
+            // document.getElementById("baal").innerHTML=
+           // document.location.reload();
+           let pp= "id "+productID;
+           console.log(pp);
+           document.getElementById("id "+productID).value = parseInt(document.getElementById("id "+productID).value) + 1;
+         })
+     }
+     function Decreament(productID){
+         let data = {
+             pid: productID,
+             
+         }
+         axios.post('http://localhost:3000/cart/cartDecreament',data).then((da)=>{
+             console.log("-------------done-------------");
+
+            console.log(productID);
+            // let x=quantity+1;
+            // document.getElementById("baal").innerHTML=
+           // document.location.reload();
+           let pp= "id "+productID;
+           console.log(pp);
+           let element=document.getElementById("id "+productID);
+           element.value = parseInt(element.value) - 1;
+           console.log(element.parentElement.parentElement);
+           if(element.value==0){
+            element.parentElement.parentElement.remove();
+           }
+           console.log("decreament done");
+         })
+     }
+ </script>
+
+<script>
+		var a = 0;
+		var b = 0;
+        function totalPRICE(x){
+            a=a+x;
+            return a;
+        }
+        
+        function openCART() {
+            if(b==0){
+                document.getElementById("user-cart").style.display= "block";
+                return b=1;            
+            }
+            else if(b==1){
+                document.getElementById("user-cart").style.display= "none";
+                return b=0;            
+            }
+		}
+				
+</script>
+ </div>
+</cart>
